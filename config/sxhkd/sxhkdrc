@@ -1,0 +1,163 @@
+#---BSPWM Bindings
+# Quit bspwm
+super + shift + Escape
+  prompt "Are you sure you would like to quit this Xsession" "bspc quit"
+
+# Restart bspwm
+super + shift + w
+  bspc wm -r
+
+# Kill Window
+super + q
+  xdo close
+
+# Focus on window in direction
+super + {h,j,k,l}
+	bspc node -f {west,south,north,east}
+
+#	Send window to desktop
+super + shift + {0-9}
+  bspc node -d {0-9}
+
+# Send window to desktop and swap to desktop
+super + control + {0-9}
+  bspc node -d {0-9} && bspunhide && bspc desktop -f {0-9}
+
+# Rotate the tree from the current nodes parent
+super + control + {Right, Left}
+  bspc node @parent -C {forward, backward}
+
+# Flip the tree from the current nodes parent
+super + control + {h,j,k,l}
+  bspc node @parent -F {vertical,horizontal,horizontal,vertical}
+
+# Toggle fullscreen on and off
+super + f
+  bspfullscreen
+
+# Toggle floating on and off
+super + o
+  bspc node focused.tiled -t floating || bspc node focused.floating -t tiled
+
+# Swap window with direction
+super + shift + {h,j,k,l}
+	bspc node -s {west,south,north,east}
+
+# Focus on desktop
+super + {0-9}
+	bspc desktop -f {0-9}
+
+# Cycle through desktops
+super + alt + {Left, Right}
+  bspc desktop -f {prev, next}
+
+# Expand a window by moving one of its side outward
+ctrl + alt + {h,j,k,l}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+  #xdo resize {-w -20, -h +20, -h -20, -w +20}
+
+# Contract a window by moving one of its side inward
+ctrl + alt + shift + {h,j,k,l}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+  #xdo resize {-w +20, -h -20, -h +20, -w -20}
+
+# Move a floating window
+ctrl + alt + {Left,Right,Up,Down}
+  xdo move {-x -20, -x +20, -y -20, -y +20}
+
+
+#---Tabbing---#
+# Prompt to open new app as a new tab
+#super + t; d
+#    tabdmenu
+
+# Add focused window to a tabbed instance in given direction
+# super + t; {h,j,k,l}
+#     tabc add {west,south,north,east} "$(bspc query -N -n focused)"
+
+# Remove one tab from tabbed
+# super + t; r
+#     tabbed=$(bspc query -N -n focused); \
+#     child=$(tabc list $tabbed | head -n1); \
+#     tabc remove $child
+
+#---System Control---#
+# Restart hotkey damon
+# Lock the screen
+#super + shift + e
+#  betterlockscreen -l
+
+# Audio Control
+# ALSA Controls
+#super + {_, shift} + p
+#  alsavolctrl Headphone {2%+, 2%-}
+#
+#super + {_, shift} + s
+#  alsavolctrl Speaker {2%+, 2%-}
+#
+#super + {Up, Down}
+#  alsavolctrl Master {2%+, 2%-}
+#
+#super + m
+#  alsavolctrl All mute
+
+# Pulse Controls
+# Screenshots
+Print
+  screenshot full
+
+shift + Print
+  screenshot select
+
+control + Print
+  screenshot fulltime
+
+super + Print
+  screenshot selecttime
+
+# reload
+super + shift + r
+	pkill -USR1 -x sxhkd
+
+# terminal
+super + Return
+	st
+
+# File Manager
+super + shift + Return
+	st -e lf
+# browser
+super + w
+    firefox
+
+# newsboat
+super + control + n
+    st -e newsboat
+
+# rofi application launcher
+super + d
+    rofi -show drun -show-icons
+
+# rofi power menu
+super + x
+    rofi -show power-menu -modi power-menu:rofi-power-menu
+
+# rofi clipboard history
+super + control + y
+    rofi -modi "clipboard:greenclip print" -show clipboard
+
+super + control + w
+    rofi-wifi-menu
+
+super + shift + x
+    i3lock-fancy
+
+# Volume up and down
+XF86AudioLowerVolume
+	pulsemixer --change-volume -5
+
+XF86AudioRaiseVolume
+	pulsemixer --change-volume +5
+
+XF86AudioMute
+    pulsemixer --toggle-mute

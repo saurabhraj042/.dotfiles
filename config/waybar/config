@@ -1,0 +1,154 @@
+// vim:ft=json
+
+{
+	"layer": "top",
+	"position": "top",
+
+	"modules-left": [
+		"sway/workspaces",
+        "sway/mode"
+    ],
+	"modules-center": [
+        "sway/window"
+	],
+	"modules-right": [
+		"pulseaudio",
+        "custom/separator",
+		"battery",
+        "custom/separator",
+       "network",
+       "custom/separator",
+        "clock#4"
+	],
+
+    "sway/window": {
+        "max-length": 80,
+        "tooltip": false
+    },
+	"custom/left-arrow-dark": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/left-arrow-light": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/right-arrow-dark": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/right-arrow-light": {
+		"format": "",
+		"tooltip": false
+	},
+
+    "custom/separator": {
+        "format": "|",
+        "interval": "once",
+        "tooltip": false
+    },
+
+	"sway/workspaces": {
+		"disable-scroll": true,
+		"format": "{index}"
+	},
+
+	"clock#1": {
+		"format": "{:%a}",
+		"tooltip": false
+	},
+	"clock#2": {
+		"format": "{:%H:%M}",
+		"tooltip": false
+	},
+	"clock#3": {
+		"format": "{:%m-%d}",
+		"tooltip": false
+	},
+        "clock#4": {
+                "format": "{:%a %d/%m %H:%M}",
+                "tooltip": false
+        },
+
+	"pulseaudio": {
+		"format": "VOL: {volume:2}%",
+		"format-bluetooth": "{icon}  {volume}%",
+		"format-muted": "",
+		"format-icons": {
+			"headphones": "",
+			"default": [
+				"",
+				""
+			]
+		},
+		"scroll-step": 5,
+		"on-click": "pavucontrol"
+	},
+	"memory": {
+		"interval": 5,
+		"format": "Mem {used:0.1f}G"
+	},
+	"cpu": {
+		"interval": 5,
+		"format": "CPU {usage:2}%"
+	},
+	"battery": {
+		"bat": "BAT0",
+                "states": {
+			"good": 95,
+			"warning": 30,
+			"critical": 15
+		},
+		"format": "{icon} {capacity}%",
+		"format-icons": [
+			"",
+			"",
+			"",
+			"",
+			""
+		]
+	},
+        "battery#bat1": {
+                "bat": "BAT1",
+                "states": {
+                        "good": 95,
+                        "warning": 30,
+                        "critical": 15
+                },
+                "format": "{icon} {capacity}%",
+                "format-icons": [
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""
+                ]
+        },
+                "sway/mode": {
+                 "format": " {}",
+                 "max-length": 50
+        },
+	"tray": {
+		"icon-size": 20
+	},
+        "network": {
+                 //"interface": "wlp4s0",
+                 "format": "{ifname}",
+                 "format-wifi": " {essid} ({signalStrength}%)",
+                 "format-ethernet": "{ifname} ",
+                 "format-disconnected": "", //An empty format will hide the module.
+                 "tooltip-format": "{ifname}",
+                 "tooltip-format-wifi": " {essid} ({signalStrength}%)",
+                 "tooltip-format-ethernet": "{ifname} ",
+                 "tooltip-format-disconnected": "Disconnected",
+                 "max-length": 50
+        },
+        "sway/window": {
+                 "format": "{}",
+                 "max-length": 40
+        },
+        "sway/mode": {
+                 "format": " {}",
+                 "max-length": 50
+        }
+}
